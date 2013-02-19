@@ -1,0 +1,101 @@
+/*
+ * grid.styl
+ *
+ * https://github.com/melchior-b/grid.styl
+ */
+
+// class names
+row-class     ?= 'row'
+column-class  ?= 'col'
+offset-class  ?= 'off'
+
+// grid settings
+max-width     ?= 1000px
+gutter-size   ?= 20px
+
+// one column
+column(a, b, name = '')
+  value = (a / b * 100)%
+
+  if name
+    .{column-class}-{name}-{a}-{b}
+      width value
+
+    if a < b
+      .{offset-class}-{name}-{a}-{b}
+        margin-left value
+
+  else
+    .{column-class}-{a}-{b}
+      width value
+
+    if a < b
+      .{offset-class}-{a}-{b}
+        margin-left value
+
+// set of columns
+columns(name = '')
+  if name
+    .{column-class}-{name}
+      width 100%
+
+  else
+    .{column-class}
+      width 100%
+
+  for a in 2 3 4 5
+    for n in 1..a
+      column(n, a, name)
+
+    if name
+      .{row-class}-{name}-{a} .{column-class}
+        width (1 / a * 100)%
+    else
+      .{row-class}-{a} .{column-class}
+        width (1 / a * 100)%
+
+  if name
+    .show-{name}
+      display block
+
+    .hide-{name}
+      display none
+
+// show class
+[class*="show-"]
+  display none
+
+// grid gutter
+gutter(size)
+  &
+    margin-left -(size)
+
+  [class*={'"' + column-class + '"'}]
+    padding-left size
+
+// clear fix
+clearfix()
+  &:after
+    content ""
+    display table
+    clear both
+
+// grid layout
+@media only screen and (min-width: 481px)
+  .{row-class}
+    gutter(gutter-size)
+    clearfix()
+
+    &.half-gutter
+      gutter(gutter-size / 2)
+
+    &.no-gutter
+      gutter(0)
+
+    [class*={'"' + column-class + '"'}]
+      -webkit-box-sizing border-box
+      -moz-box-sizing border-box
+      box-sizing border-box
+      float left
+
+  columns()
