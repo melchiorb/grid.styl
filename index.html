@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Grid.styl by melchior-b</title>
+    <title>grid.styl by melchior-b</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
@@ -15,7 +15,7 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1>Grid.styl</h1>
+        <h1>grid.styl</h1>
         <p>A practical, minimalist CSS grid system for Stylus</p>
 
         <p class="view"><a href="https://github.com/melchior-b/grid.styl">View the Project on GitHub <small>melchior-b/grid.styl</small></a></p>
@@ -42,8 +42,8 @@
 
 <p>Import the grid into an existing stylus file.</p>
 
-<pre lang="stylus"><code>@import grid
-</code></pre>
+<div class="highlight"><pre><span class="k">@import</span> <span class="nt">grid</span>
+</pre></div>
 
 <p>Set the grid class on elements that will contain grid items (rows).</p>
 
@@ -71,14 +71,14 @@
 
 <p>To use different grid setups on different screen sizes define them in a stylus file. The names will become part of the class name.</p>
 
-<pre lang="stylus"><code>// typical tablet layout
-@media only screen and (min-width: 481px) and (max-width: 799px)
-  columns('t')
+<div class="highlight"><pre><span class="o">//</span> <span class="nt">typical</span> <span class="nt">tablet</span> <span class="nt">layout</span>
+<span class="k">@media</span> <span class="nt">only</span> <span class="nt">screen</span> <span class="nt">and</span> <span class="o">(</span><span class="nt">min-width</span><span class="o">:</span> <span class="nt">481px</span><span class="o">)</span> <span class="nt">and</span> <span class="o">(</span><span class="nt">max-width</span><span class="o">:</span> <span class="nt">799px</span><span class="o">)</span>
+  <span class="nt">columns</span><span class="o">(</span><span class="s1">'t'</span><span class="o">)</span>
 
-// typical desktop layout
-@media only screen and (min-width: 800px)
-  columns('d')
-</code></pre>
+<span class="o">//</span> <span class="nt">typical</span> <span class="nt">desktop</span> <span class="nt">layout</span>
+<span class="k">@media</span> <span class="nt">only</span> <span class="nt">screen</span> <span class="nt">and</span> <span class="o">(</span><span class="nt">min-width</span><span class="o">:</span> <span class="nt">800px</span><span class="o">)</span>
+  <span class="nt">columns</span><span class="o">(</span><span class="s1">'d'</span><span class="o">)</span>
+</pre></div>
 
 <p>This will create additional classes that only apply the grid at the specified screen size.</p>
 
@@ -98,13 +98,13 @@
 
 <p>Override size and/or naming options.</p>
 
-<div class="highlight"><pre>// grid settings
-gutter-size   = 20px
+<div class="highlight"><pre><span class="o">//</span> <span class="nt">grid</span> <span class="nt">settings</span>
+<span class="nt">gutter-size</span>   <span class="o">=</span> <span class="nt">20px</span>
 
-// class names
-row-class     = 'row'
-column-class  = 'col'
-offset-class  = 'off'
+<span class="o">//</span> <span class="nt">class</span> <span class="nt">names</span>
+<span class="nt">row-class</span>     <span class="o">=</span> <span class="s1">'row'</span>
+<span class="nt">column-class</span>  <span class="o">=</span> <span class="s1">'col'</span>
+<span class="nt">offset-class</span>  <span class="o">=</span> <span class="s1">'off'</span>
 </pre></div>
 
 <p>Offseting columns works as expected.</p>
