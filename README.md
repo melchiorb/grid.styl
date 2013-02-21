@@ -6,7 +6,7 @@ Even though that's incredibly unique already, here are some semi-distinguishing 
 - uses the awesome [Stylus](http://learnboost.github.com/stylus/)
 - fluid, responsive & configurable
 - allows easy definition of different grids depending on screen size
-- < 100 lines, does only grids, nothing else
+- ~100 lines, does only grids, nothing else
 
 Basic Usage
 -----------
@@ -42,6 +42,30 @@ Alternatively, set column widths on the row to affect all columns equally.
 </div>
 ```
 
+Semantic Usage
+--------------
+
+Grid styles can also be included in other classes for clean markup.
+
+```css
+@media only screen and (min-width: 481px)
+  #container
+    row()
+
+    > div
+      column(1, 3)
+```
+
+```html
+<div id="container">
+  <div>1/3 Column</div>
+  <div>1/3 Column</div>
+  <div>1/3 Column</div>
+</div>
+```
+
+Adaptive usage & offsets discussed below work as expected. Half size and no gutter row do not (yet).
+
 Adaptive Usage
 --------------
 
@@ -50,11 +74,11 @@ To use different grid setups on different screen sizes define them in a stylus f
 ```css
 // typical tablet layout
 @media only screen and (min-width: 481px) and (max-width: 799px)
-  columns('t')
+  setup-columns('t')
 
 // typical desktop layout
 @media only screen and (min-width: 800px)
-  columns('d')
+  setup-columns('d')
 ```
 
 This will create additional classes that only apply the grid at the specified screen size.

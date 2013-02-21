@@ -10,16 +10,56 @@ column-class  ?= 'col'
 offset-class  ?= 'off'
 
 // grid settings
-max-width     ?= 1000px
 gutter-size   ?= 20px
 
+// clear fix
+clearfix()
+  &:after
+    content ""
+    display table
+    clear both
+
+// grid gutter
+gutter(size)
+  &
+    margin-left -(size)
+
+    [class*={'"' + column-class + '"'}]
+      padding-left size
+
+// add row styles to selector
+row()
+  clearfix()
+  gutter(gutter-size)
+
+  &.half-gutter
+    gutter(gutter-size / 2)
+
+  &.no-gutter
+    gutter(0)
+
+// add column styles to selector
+column(a, b, setup = true)
+  width (a / b * 100)%
+
+  if setup
+    -webkit-box-sizing border-box
+    -moz-box-sizing border-box
+    box-sizing border-box
+    float left
+    padding-left gutter-size
+
+// add offset styles to selector
+offset(a, b)
+  margin-left (a / b * 100)%
+
 // one column
-column(a, b, name = '')
-  value = (a / b * 100)%
+setup-column(a, b, name = '')
+  value = (a / b * 100)% 
 
   if name
     .{column-class}-{name}-{a}-{b}
-      width value
+      column(a, b, false)
 
     if a < b
       .{offset-class}-{name}-{a}-{b}
@@ -27,32 +67,31 @@ column(a, b, name = '')
 
   else
     .{column-class}-{a}-{b}
-      width value
+      column(a, b, false)
 
     if a < b
       .{offset-class}-{a}-{b}
         margin-left value
 
 // set of columns
-columns(name = '')
+setup-columns(name = '')
   if name
     .{column-class}-{name}
       width 100%
-
   else
     .{column-class}
       width 100%
 
   for a in 2 3 4 5
     for n in 1..a
-      column(n, a, name)
+      setup-column(n, a, name)
 
     if name
       .{row-class}-{name}-{a} .{column-class}
-        width (1 / a * 100)%
+        column(1, a, false)
     else
       .{row-class}-{a} .{column-class}
-        width (1 / a * 100)%
+        column(1, a, false)
 
   if name
     .show-{name}
@@ -65,37 +104,15 @@ columns(name = '')
 [class*="show-"]
   display none
 
-// grid gutter
-gutter(size)
-  &
-    margin-left -(size)
-
-  [class*={'"' + column-class + '"'}]
-    padding-left size
-
-// clear fix
-clearfix()
-  &:after
-    content ""
-    display table
-    clear both
-
 // grid layout
 @media only screen and (min-width: 481px)
   .{row-class}
-    gutter(gutter-size)
-    clearfix()
+    row()
 
-    &.half-gutter
-      gutter(gutter-size / 2)
+  [class*={'"' + column-class + '"'}]
+    -webkit-box-sizing border-box
+    -moz-box-sizing border-box
+    box-sizing border-box
+    float left
 
-    &.no-gutter
-      gutter(0)
-
-    [class*={'"' + column-class + '"'}]
-      -webkit-box-sizing border-box
-      -moz-box-sizing border-box
-      box-sizing border-box
-      float left
-
-  columns()
+  setup-columns()
