@@ -6,7 +6,7 @@ Even though that's incredibly unique already, here are some semi-distinguishing 
 - uses the awesome [Stylus](http://learnboost.github.com/stylus/)
 - fluid, responsive & configurable
 - allows easy definition of different grids depending on screen size
-- ~100 lines, does only grids, nothing else
+- <200 lines, does only grids, nothing else
 
 Basic Usage
 -----------
@@ -69,16 +69,16 @@ Adaptive usage & offsets discussed below work as expected. Half size and no gutt
 Adaptive Usage
 --------------
 
-To use different grid setups on different screen sizes define them in a stylus file. The names will become part of the class name.
+To use different grid setups on different screen sizes define them in a stylus file. The names will become part of the class name. Several typical media queries are included.
 
 ```css
 // typical tablet layout
-@media only screen and (min-width: 481px) and (max-width: 799px)
-  setup-columns('t')
+@media media-tablet
+  grid('t')
 
 // typical desktop layout
-@media only screen and (min-width: 800px)
-  setup-columns('d')
+@media media-desktop
+  grid('d')
 ```
 
 This will create additional classes that only apply the grid at the specified screen size.

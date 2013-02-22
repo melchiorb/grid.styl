@@ -12,6 +12,35 @@ offset-class  ?= 'off'
 // grid settings
 gutter-size   ?= 20px
 
+// create media query with min and/or max size
+media-query(min, max = null)
+  if min && max
+    "only screen and (min-width: " + min + ") and (max-width: " + max + ")"
+  else if max
+    "only screen and (max-width: " + max + ")"
+  else
+    "only screen and (min-width: " + min + ")"
+
+// standard media queries
+media-phone                 ?= media-query(0px, 480px)
+
+media-tablet                ?= media-query(481px, 1024px)
+
+media-tablet-portrait       ?= media-query(481px, 768px)
+media-min-tablet-portrait   ?= media-query(481px)
+media-max-tablet-portrait   ?= media-query(0px, 768px)
+
+media-tablet-landscape      ?= media-query(769px, 1024px)
+media-min-tablet-landscape  ?= media-query(769px)
+media-max-tablet-landscape  ?= media-query(0px, 1024px)
+
+media-desktop               ?= media-query(1025px, 1599px)
+media-min-desktop           ?= media-query(1025px)
+media-max-desktop           ?= media-query(1599px)
+media-large-desktop         ?= media-query(1600px)
+
+media-grid                  ?= media-min-tablet-portrait
+
 // clear fix
 clearfix()
   &:after
@@ -83,8 +112,6 @@ setup-column(a, b, name = '')
     if a < b
       .{offset-class}-{name}-{a}-{b}
         margin-left value
-
-  // default screen size
   else
     // column class
     .{column-class}-{a}-{b}
@@ -99,7 +126,7 @@ setup-column(a, b, name = '')
  * setup all column sizes and utility classes
  * use in selectors to create columns for one screen size
  */
-setup-columns(name = '')
+grid(name = '')
   // full width columns
   if name
     .{column-class}-{name}
@@ -134,8 +161,8 @@ setup-columns(name = '')
 [class*="show-"]
   display none
 
-// standard grid layout for screen sizes over 481px
-@media only screen and (min-width: 481px)
+// standard grid layout
+@media media-grid
   // row
   .{row-class}
     row()
@@ -147,4 +174,4 @@ setup-columns(name = '')
     box-sizing border-box
     float left
 
-  setup-columns()
+  grid()
