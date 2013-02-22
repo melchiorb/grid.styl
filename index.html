@@ -37,7 +37,7 @@
 </li>
 <li>fluid, responsive &amp; configurable</li>
 <li>allows easy definition of different grids depending on screen size</li>
-<li>~100 lines, does only grids, nothing else</li>
+<li>&lt;200 lines, does only grids, nothing else</li>
 </ul><h2>Basic Usage</h2>
 
 <p>Import the grid into an existing stylus file.</p>
@@ -90,15 +90,15 @@
 
 <h2>Adaptive Usage</h2>
 
-<p>To use different grid setups on different screen sizes define them in a stylus file. The names will become part of the class name.</p>
+<p>To use different grid setups on different screen sizes define them in a stylus file. The names will become part of the class name. Several typical media queries are included.</p>
 
 <div class="highlight"><pre><span class="o">//</span> <span class="nt">typical</span> <span class="nt">tablet</span> <span class="nt">layout</span>
-<span class="k">@media</span> <span class="nt">only</span> <span class="nt">screen</span> <span class="nt">and</span> <span class="o">(</span><span class="nt">min-width</span><span class="o">:</span> <span class="nt">481px</span><span class="o">)</span> <span class="nt">and</span> <span class="o">(</span><span class="nt">max-width</span><span class="o">:</span> <span class="nt">799px</span><span class="o">)</span>
-  <span class="nt">setup-columns</span><span class="o">(</span><span class="s1">'t'</span><span class="o">)</span>
+<span class="k">@media</span> <span class="nt">media-tablet</span>
+  <span class="nt">grid</span><span class="o">(</span><span class="s1">'t'</span><span class="o">)</span>
 
 <span class="o">//</span> <span class="nt">typical</span> <span class="nt">desktop</span> <span class="nt">layout</span>
-<span class="k">@media</span> <span class="nt">only</span> <span class="nt">screen</span> <span class="nt">and</span> <span class="o">(</span><span class="nt">min-width</span><span class="o">:</span> <span class="nt">800px</span><span class="o">)</span>
-  <span class="nt">setup-columns</span><span class="o">(</span><span class="s1">'d'</span><span class="o">)</span>
+<span class="k">@media</span> <span class="nt">media-desktop</span>
+  <span class="nt">grid</span><span class="o">(</span><span class="s1">'d'</span><span class="o">)</span>
 </pre></div>
 
 <p>This will create additional classes that only apply the grid at the specified screen size.</p>
