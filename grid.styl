@@ -19,15 +19,20 @@ clearfix()
     display table
     clear both
 
-// grid gutter
+// grid gutter for rows & columns
 gutter(size)
+  // margin correction for row
   &
     margin-left -(size)
 
+    // gutter for columns
     [class*={'"' + column-class + '"'}]
       padding-left size
 
-// add row styles to selector
+/*
+ * add row styles to selector
+ * use in selectors to turn elements into rows
+ */
 row()
   clearfix()
   gutter(gutter-size)
@@ -38,43 +43,64 @@ row()
   &.no-gutter
     gutter(0)
 
-// add column styles to selector
+/*
+ * add column styles to selector
+ * use in selectors to turn elements into columns
+ */
 column(a, b, setup = true)
   width (a / b * 100)%
 
   if setup
+    // correct sizing to include gutter padding
+    padding-left gutter-size
     -webkit-box-sizing border-box
     -moz-box-sizing border-box
     box-sizing border-box
+    
     float left
-    padding-left gutter-size
 
-// add offset styles to selector
+/*
+ * adds offset to column elements
+ * use in selectors to add offset to column elements
+ */
 offset(a, b)
   margin-left (a / b * 100)%
 
-// one column
+/*
+ * setup one column size and utility classes
+ */
 setup-column(a, b, name = '')
+  // width
   value = (a / b * 100)% 
 
+  // named screen size
   if name
+    // column class
     .{column-class}-{name}-{a}-{b}
       column(a, b, false)
 
+    // offset class
     if a < b
       .{offset-class}-{name}-{a}-{b}
         margin-left value
 
+  // default screen size
   else
+    // column class
     .{column-class}-{a}-{b}
       column(a, b, false)
 
+    // offset class
     if a < b
       .{offset-class}-{a}-{b}
         margin-left value
 
-// set of columns
+/*
+ * setup all column sizes and utility classes
+ * use in selectors to create columns for one screen size
+ */
 setup-columns(name = '')
+  // full width columns
   if name
     .{column-class}-{name}
       width 100%
@@ -82,10 +108,13 @@ setup-columns(name = '')
     .{column-class}
       width 100%
 
+  // 1/2,3,4,5 fraction sizes
   for a in 2 3 4 5
+    // columns
     for n in 1..a
       setup-column(n, a, name)
 
+    // row sizes
     if name
       .{row-class}-{name}-{a} .{column-class}
         column(1, a, false)
@@ -93,6 +122,7 @@ setup-columns(name = '')
       .{row-class}-{a} .{column-class}
         column(1, a, false)
 
+  // visibility helpers
   if name
     .show-{name}
       display block
@@ -100,15 +130,17 @@ setup-columns(name = '')
     .hide-{name}
       display none
 
-// show class
+// visibility helper (hidden)
 [class*="show-"]
   display none
 
-// grid layout
+// standard grid layout for screen sizes over 481px
 @media only screen and (min-width: 481px)
+  // row
   .{row-class}
     row()
 
+  // columns
   [class*={'"' + column-class + '"'}]
     -webkit-box-sizing border-box
     -moz-box-sizing border-box
