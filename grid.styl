@@ -126,7 +126,18 @@ setup-column(a, b, name = '')
  * setup all column sizes and utility classes
  * use in selectors to create columns for one screen size
  */
-grid(name = '')
+grid(name = false, fractions = 2 3 4 5)
+  // row
+  .{row-class}
+    row()
+
+  // columns
+  [class*={'"' + column-class + '"'}]
+    -webkit-box-sizing border-box
+    -moz-box-sizing border-box
+    box-sizing border-box
+    float left
+
   // full width columns
   if name
     .{column-class}-{name}
@@ -136,7 +147,7 @@ grid(name = '')
       width 100%
 
   // 1/2,3,4,5 fraction sizes
-  for a in 2 3 4 5
+  for a in fractions
     // columns
     for n in 1..a
       setup-column(n, a, name)
@@ -156,22 +167,3 @@ grid(name = '')
 
     .hide-{name}
       display none
-
-// visibility helper (hidden)
-[class*="show-"]
-  display none
-
-// standard grid layout
-@media media-grid
-  // row
-  .{row-class}
-    row()
-
-  // columns
-  [class*={'"' + column-class + '"'}]
-    -webkit-box-sizing border-box
-    -moz-box-sizing border-box
-    box-sizing border-box
-    float left
-
-  grid()

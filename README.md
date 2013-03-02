@@ -11,10 +11,13 @@ Even though that's incredibly unique already, here are some semi-distinguishing 
 Basic Usage
 -----------
 
-Import the grid into an existing stylus file.
+Import the grid into an existing stylus file & create at least one grid, preferably inside a media query.
 
 ```css
 @import grid
+
+@media media-grid
+  grid()
 ```
 
 Set the grid class on elements that will contain grid items (rows).
