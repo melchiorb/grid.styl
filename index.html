@@ -40,9 +40,12 @@
 <li>&lt;200 lines, does only grids, nothing else</li>
 </ul><h2>Basic Usage</h2>
 
-<p>Import the grid into an existing stylus file.</p>
+<p>Import the grid into an existing stylus file &amp; create at least one grid, preferably inside a media query.</p>
 
 <div class="highlight"><pre><span class="k">@import</span> <span class="nt">grid</span>
+
+<span class="k">@media</span> <span class="nt">media-grid</span>
+  <span class="nt">grid</span><span class="o">()</span>
 </pre></div>
 
 <p>Set the grid class on elements that will contain grid items (rows).</p>
